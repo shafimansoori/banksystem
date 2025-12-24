@@ -12,6 +12,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ChatBotController;
 use App\Http\Controllers\CardTypeController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\BankLocationController;
@@ -32,7 +33,7 @@ use App\Http\Controllers\SandBox\SmsController;
 
 
 // it includes  a register|login|logout routes
-Auth::routes(); 
+Auth::routes();
 
 // str, str
 Route::resource('/blog', PostsController::class);
@@ -143,5 +144,8 @@ Route::group(array('middleware' => 'auth'), static function(){
     Route::post('/bank/location/update/{id}',[BankLocationController::class,'update'])->name('edit_bank_location');
     Route::get('/bank/location/delete/{id}',[BankLocationController::class,'destory'])->name('delete_bank_location');
     Route::get('/bank/location/restore/{id}',[BankLocationController::class,'restore'])->name('restore_bank_location');
+
+    // Chatbot
+    Route::post('/chatbot/respond', [ChatBotController::class, 'respond'])->name('chatbot.respond');
 
 });

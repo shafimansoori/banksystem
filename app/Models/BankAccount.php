@@ -19,4 +19,22 @@ class BankAccount extends Model
     {
         return $this->hasOne('App\Models\BankLocation','id','bank_location_id');
     }
+
+    public function currency()
+    {
+        return $this->belongsTo('App\Models\Currency','currency_id','id');
+    }
+    
+    /**
+     * Get currency code with fallback
+     */
+    public function getCurrencyCode()
+    {
+        return $this->currency ? $this->currency->code : 'TRY';
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User','user_id','id');
+    }
 }

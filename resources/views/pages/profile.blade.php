@@ -13,19 +13,19 @@
   background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
-}  
-  
+}
+
 </style>
 
 @endsection
 
 @section('content')
 
-<div class="row">    
+<div class="row">
 
     <div class="col-md-12">
         <div class="row">
-            
+
             <div class="col-sm-12 col-md-6 col-lg-6 p-2">
                 <div class="p-4 card">
 
@@ -63,7 +63,7 @@
                                 @else
                                     <i class="dot bg-danger"> </i><b> &nbsp; &nbsp;De-activated</b>
                                 @endif
-                                
+
                             </p>
                         </div>
                     </div>
@@ -72,14 +72,14 @@
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <p>
                                 Address<br/>
-                                <b>{{ $user->address }}</b>
+                                <b>{{ $user->address ?? 'Not specified' }}</b>
                             </p>
                         </div>
 
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <p>
                                 Country<br/>
-                                <b>{{ $user->country->name }}</b>
+                                <b>{{ $user->country ? $user->country->name : 'Not specified' }}</b>
                             </p>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
         </div>
     </div>
 </div>
-     
+
 
 
 
