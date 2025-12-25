@@ -393,7 +393,7 @@
 
     <!-- Floating AI Chatbot Button -->
     <button class="ai-chatbot-btn" id="aiChatbotBtn" title="AI Assistant">
-        <i class="fas fa-robot"></i>
+        <i class="mdi mdi-robot"></i>
     </button>
 
     <!-- AI Chatbot Modal -->
@@ -401,10 +401,10 @@
         <div class="chatbot-header bg-gradient-primary">
             <div class="d-flex align-items-center">
                 <div class="chatbot-avatar">
-                    <i class="fas fa-robot"></i>
+                    <i class="mdi mdi-robot"></i>
                 </div>
                 <div class="ml-3">
-                    <h6 class="mb-0">🤖 Akıllı Asistan</h6>
+                    <h6 class="mb-0">Akıllı Asistan</h6>
                     <small>AI destekli bankacılık asistanı</small>
                 </div>
             </div>

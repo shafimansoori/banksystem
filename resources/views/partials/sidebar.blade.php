@@ -125,7 +125,7 @@
                 <i class="mdi mdi-email-outline"></i>
             </a>
             <a href="{{route('settings')}}" class="sidebar-user-action" title="Settings">
-                <i class="mdi mdi-cog-outline"></i>
+                <i class="mdi mdi-settings"></i>
             </a>
             <a href="{{route('logout')}}" class="sidebar-user-action text-danger" title="Logout">
                 <i class="mdi mdi-logout"></i>
