@@ -404,7 +404,7 @@
                     <i class="mdi mdi-robot"></i>
                 </div>
                 <div class="ml-3">
-                    <h6 class="mb-0">Akıllı Asistan</h6>
+                    <h6 class="mb-0">Akıllı Asistan <span id="aiBadge" class="badge badge-light" style="font-size: 9px; padding: 2px 6px; margin-left: 5px; display: none;">GPT</span></h6>
                     <small>AI destekli bankacılık asistanı</small>
                 </div>
             </div>
@@ -439,7 +439,7 @@
             <div class="message-wrapper bot-message">
                 <div class="avatar-container">
                     <div class="bot-avatar">
-                        <i class="fas fa-robot"></i>
+                        <i class="mdi mdi-robot"></i>
                     </div>
                 </div>
                 <div class="message-content">
@@ -463,7 +463,7 @@
             <div class="message-wrapper bot-message">
                 <div class="avatar-container">
                     <div class="bot-avatar">
-                        <i class="fas fa-robot"></i>
+                        <i class="mdi mdi-robot"></i>
                     </div>
                 </div>
                 <div class="message-content">
@@ -594,7 +594,7 @@
                     messageWrapper.innerHTML =
                         '<div class="avatar-container">' +
                             '<div class="bot-avatar">' +
-                                '<i class="fas fa-robot"></i>' +
+                                '<i class="mdi mdi-robot"></i>' +
                             '</div>' +
                         '</div>' +
                         '<div class="message-content">' +
@@ -661,6 +661,12 @@
                     if (data.session_id) {
                         sessionId = data.session_id;
                         localStorage.setItem('chatbot_session_id', sessionId);
+                    }
+
+                    // Show AI badge if using OpenAI
+                    var aiBadge = document.getElementById('aiBadge');
+                    if (data.used_ai && aiBadge) {
+                        aiBadge.style.display = 'inline';
                     }
 
                     appendMessage(

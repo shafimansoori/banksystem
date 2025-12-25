@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
             array (
                 'id' => 1,
                 'picture' => 'https://cdn1.iconfinder.com/data/icons/bokbokstars-121-classic-stock-icons-1/512/person-man.png',
-                'first_name' => 'Ömer',
+                'first_name' => 'Shafiullah',
                 'middle_name' => 'Ahmed',
                 'last_name' => 'MEMES',
                 'email' => 'admin@gmail.com',
@@ -43,7 +43,7 @@ class UsersTableSeeder extends Seeder
             array (
                 'id' => 2,
                 'picture' => 'https://cdn1.iconfinder.com/data/icons/bokbokstars-121-classic-stock-icons-1/512/person-man.png',
-                'first_name' => 'Ömer',
+                'first_name' => 'Shafiullah',
                 'middle_name' => 'Ahmed',
                 'last_name' => 'MEMES',
                 'email' => 'ali@gmail.com',
