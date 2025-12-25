@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PagesController;
-use App\Http\Controllers\PostsController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ProfileController;
@@ -35,11 +33,7 @@ use App\Http\Controllers\SandBox\SmsController;
 // it includes  a register|login|logout routes
 Auth::routes();
 
-// str, str
-Route::resource('/blog', PostsController::class);
-
-
-// go to login screen from post/blog page
+// go to login screen
 Route::get('/login', static function () {
     return view('auth.customer.login');
 })->name("login");
@@ -68,7 +62,9 @@ Route::get('/sandbox/send/sms', static function () {
 Route::post('/sandbox/process/sms',[SmsController::class,'processMessage'])->name('process_sms_sandbox');
 
 // //  str, array
-Route::get('/', [PagesController::class, 'index'])->name('index');
+Route::get('/', function () {
+    return redirect()->route('login');
+})->name('index');
 
 
 Route::group(array('middleware' => 'auth'), static function(){

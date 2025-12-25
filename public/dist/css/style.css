@@ -8371,8 +8371,7 @@ html[dir="ltr"] body .p-l-0 {
   #main-wrapper[data-layout="vertical"][data-header-position="fixed"] .topbar {
     position: fixed;
     width: 100%; }
-  #main-wrapper[data-layout="vertical"][data-header-position="fixed"] .page-wrapper {
-    padding-top: 64px; }
+
   #main-wrapper[data-layout="vertical"][data-boxed-layout="boxed"] {
     max-width: 1200px;
     margin: 0 auto;
@@ -8411,9 +8410,6 @@ html[dir="ltr"] body .p-l-0 {
       margin-left: 65px; }
     #main-wrapper[data-layout="vertical"][data-sidebartype="mini-sidebar"] .page-wrapper {
       margin-left: 65px; }
-    #main-wrapper[data-layout="vertical"][data-sidebartype="mini-sidebar"] .sidebar-nav .hide-menu,
-    #main-wrapper[data-layout="vertical"][data-sidebartype="mini-sidebar"] .sidebar-nav .has-arrow:after {
-      display: none; }
     #main-wrapper[data-layout="vertical"][data-sidebartype="mini-sidebar"] .sidebar-nav .nav-small-cap {
       -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -9184,7 +9180,6 @@ Main sidebar
   height: 100%;
   top: 0px;
   z-index: 10;
-  padding-top: 64px;
   background: #fff;
   -webkit-box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
   box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08); }
@@ -14651,13 +14646,11 @@ File: scss
   #main-wrapper[data-layout="horizontal"][data-header-position="fixed"] .topbar {
     position: fixed;
     width: 100%; }
-  #main-wrapper[data-layout="horizontal"][data-header-position="fixed"] .left-sidebar {
-    padding-top: 64px; }
+
   #main-wrapper[data-layout="horizontal"][data-sidebar-position="fixed"] .topbar {
     position: fixed;
     width: 100%; }
-  #main-wrapper[data-layout="horizontal"][data-sidebar-position="fixed"] .left-sidebar {
-    padding-top: 64px;
+
     position: fixed; }
   #main-wrapper[data-layout="horizontal"][data-sidebar-position="fixed"] .page-wrapper {
     padding-top: 78px; }
