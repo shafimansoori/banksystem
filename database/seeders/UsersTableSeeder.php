@@ -35,8 +35,8 @@ class UsersTableSeeder extends Seeder
                 'description' => 'System Admin Account',
                 'address' => 'Turkiye Hatay 31, Antakya, Merkez',
                 'remember_token' => NULL,
-                'created_at' => '2023-05-20 01:50:36',
-                'updated_at' => '2023-05-20 01:50:36',
+                'created_at' => '2025-10-20 15:30:12',
+                'updated_at' => '2025-10-20 15:30:12',
                 'deleted_at' => NULL,
             ),
             1 =>
@@ -56,8 +56,8 @@ class UsersTableSeeder extends Seeder
                 'description' => 'Customer',
                 'address' => 'Turkiye Hatay 31, Antakya, Merkez',
                 'remember_token' => NULL,
-                'created_at' => '2023-05-03 19:43:36',
-                'updated_at' => '2023-05-03 19:43:36',
+                'created_at' => '2025-10-22 09:15:45',
+                'updated_at' => '2025-10-22 09:15:45',
                 'deleted_at' => NULL,
             ),
             2 =>
@@ -77,8 +77,8 @@ class UsersTableSeeder extends Seeder
                 'description' => 'Customer Care Account',
                 'address' => 'Turkiye Elazig 23, AtaSehir, Merkez',
                 'remember_token' => NULL,
-                'created_at' => '2023-05-03 19:43:36',
-                'updated_at' => '2023-05-03 19:43:36',
+                'created_at' => '2025-10-25 14:22:18',
+                'updated_at' => '2025-10-25 14:22:18',
                 'deleted_at' => NULL,
             ),
         ));

@@ -11,7 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('card_transactions', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('card_id');
+            $table->string('transaction_code')->nullable();
+            $table->string('narration')->nullable();
+            $table->decimal('amount', 15, 2)->default(0);
+            $table->enum('type', ['credit', 'debit'])->default('debit');
+            $table->enum('status', ['pending', 'completed', 'failed'])->default('completed');
+            $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('card_id')->references('id')->on('cards')->onDelete('cascade');
+        });
     }
 
     /**
@@ -19,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('card_transactions');
     }
 };

@@ -151,6 +151,11 @@
             display: flex;
             margin-bottom: 16px;
             animation: fadeIn 0.3s ease;
+            align-items: flex-start;
+        }
+
+        .message-wrapper.user-message {
+            flex-direction: row-reverse;
         }
 
         @keyframes fadeIn {
@@ -181,14 +186,12 @@
 
         .message-content {
             margin-left: 10px;
-            flex: 1;
+            max-width: 85%;
         }
 
         .user-message .message-content {
             margin-left: 0;
             margin-right: 10px;
-            display: flex;
-            justify-content: flex-end;
         }
 
         .message-bubble {
@@ -196,7 +199,6 @@
             padding: 10px 14px;
             border-radius: 12px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            max-width: 85%;
         }
 
         .message-bubble.user {
@@ -214,10 +216,6 @@
             font-size: 10px;
             opacity: 0.6;
             text-align: right;
-        }
-
-        .user-message {
-            flex-direction: row-reverse;
         }
 
         /* Typing Indicator */
@@ -408,9 +406,14 @@
                     <small>AI destekli bankacılık asistanı</small>
                 </div>
             </div>
-            <button class="close-chatbot" id="closeChatbot">
-                <i class="fas fa-times"></i>
-            </button>
+            <div class="d-flex align-items-center">
+                <button class="close-chatbot mr-2" id="clearHistory" title="Geçmişi Temizle" style="font-size: 16px;">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+                <button class="close-chatbot" id="closeChatbot">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
         </div>
 
         <!-- Quick Action Buttons -->
@@ -525,7 +528,11 @@
             var chatbotStatus = document.getElementById('chatbotStatus');
             var typingIndicator = document.getElementById('typingIndicator');
             var chatbotUrl = "{{ route('chatbot.respond') }}";
+            var historyUrl = "{{ route('chatbot.history') }}";
+            var clearHistoryUrl = "{{ route('chatbot.clear') }}";
             var csrfToken = "{{ csrf_token() }}";
+            var historyLoaded = false;
+            var clearHistoryBtn = document.getElementById('clearHistory');
 
             // Generate or retrieve session ID
             var sessionId = localStorage.getItem('chatbot_session_id');
@@ -534,17 +541,89 @@
                 localStorage.setItem('chatbot_session_id', sessionId);
             }
 
+            // Load chat history from database
+            function loadChatHistory() {
+                if (historyLoaded) return;
+
+                fetch(historyUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    }
+                })
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    if (data.messages && data.messages.length > 0) {
+                        // Clear default welcome message
+                        chatbotMessages.innerHTML = '';
+
+                        // Add all history messages
+                        data.messages.forEach(function(msg) {
+                            appendMessageWithTime(msg.text, msg.type, msg.time);
+                        });
+
+                        // Show AI badge
+                        var aiBadge = document.getElementById('aiBadge');
+                        if (aiBadge) aiBadge.style.display = 'inline';
+                    }
+                    historyLoaded = true;
+                })
+                .catch(function(error) {
+                    console.error('Failed to load chat history:', error);
+                    historyLoaded = true;
+                });
+            }
+
             // Toggle chatbot
             chatbotBtn.addEventListener('click', function() {
                 chatbotModal.classList.toggle('active');
                 if (chatbotModal.classList.contains('active')) {
                     chatbotInput.focus();
+                    loadChatHistory();
                 }
             });
 
             // Close chatbot
             closeChatbot.addEventListener('click', function() {
                 chatbotModal.classList.remove('active');
+            });
+
+            // Clear chat history
+            clearHistoryBtn.addEventListener('click', function() {
+                if (!confirm('Tüm sohbet geçmişi silinecek. Emin misiniz?')) {
+                    return;
+                }
+
+                fetch(clearHistoryUrl, {
+                    method: 'DELETE',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    }
+                })
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    if (data.success) {
+                        // Clear messages and show welcome
+                        chatbotMessages.innerHTML = '<div class="message-wrapper bot-message">' +
+                            '<div class="avatar-container"><div class="bot-avatar"><i class="mdi mdi-robot"></i></div></div>' +
+                            '<div class="message-content"><div class="message-bubble bot">' +
+                            '<div class="message-text">Merhaba! 👋 Ben sizin kişisel bankacılık asistanınızım. Size nasıl yardımcı olabilirim?</div>' +
+                            '<div class="message-time">Şimdi</div></div></div></div>';
+                        historyLoaded = false;
+                        setStatus('Geçmiş temizlendi');
+                        setTimeout(function() { setStatus(''); }, 2000);
+                    }
+                })
+                .catch(function(error) {
+                    console.error('Failed to clear history:', error);
+                    setStatus('Geçmiş temizlenemedi');
+                });
             });
 
             // Close on outside click
@@ -574,13 +653,16 @@
             }
 
             function appendMessage(text, type, sentiment) {
-                var messageWrapper = document.createElement('div');
-                messageWrapper.className = 'message-wrapper ' + type + '-message';
-
                 var currentTime = new Date().toLocaleTimeString('tr-TR', {
                     hour: '2-digit',
                     minute: '2-digit'
                 });
+                appendMessageWithTime(text, type, currentTime, sentiment);
+            }
+
+            function appendMessageWithTime(text, type, time, sentiment) {
+                var messageWrapper = document.createElement('div');
+                messageWrapper.className = 'message-wrapper ' + type + '-message';
 
                 var sentimentEmoji = '';
                 if (sentiment) {
@@ -600,7 +682,7 @@
                         '<div class="message-content">' +
                             '<div class="message-bubble bot">' +
                                 '<div class="message-text">' + text + sentimentEmoji + '</div>' +
-                                '<div class="message-time">' + currentTime + '</div>' +
+                                '<div class="message-time">' + time + '</div>' +
                             '</div>' +
                         '</div>';
                 } else {
@@ -608,12 +690,7 @@
                         '<div class="message-content">' +
                             '<div class="message-bubble user">' +
                                 '<div class="message-text">' + text + '</div>' +
-                                '<div class="message-time">' + currentTime + '</div>' +
-                            '</div>' +
-                        '</div>' +
-                        '<div class="avatar-container">' +
-                            '<div class="user-avatar">' +
-                                '<i class="fas fa-user"></i>' +
+                                '<div class="message-time">' + time + '</div>' +
                             '</div>' +
                         '</div>';
                 }

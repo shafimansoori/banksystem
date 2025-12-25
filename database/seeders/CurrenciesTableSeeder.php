@@ -23,32 +23,32 @@ class CurrenciesTableSeeder extends Seeder
                 'id' => 1,
                 'name' => 'US Dollars',
                 'symbol' => '$',
-                'created_at' => '2023-03-23 08:19:21',
-                'updated_at' => '2023-03-23 08:19:21',
+                'created_at' => '2025-10-23 08:19:21',
+                'updated_at' => '2025-10-23 08:19:21',
             ),
             1 =>
             array (
                 'id' => 2,
                 'name' => 'Turk Lira',
                 'symbol' => '₺',
-                'created_at' => '2023-03-23 08:19:21',
-                'updated_at' => '2023-03-23 08:19:21',
+                'created_at' => '2025-10-23 08:19:21',
+                'updated_at' => '2025-10-23 08:19:21',
             ),
             2 =>
             array (
                 'id' => 3,
                 'name' => 'Pound',
                 'symbol' => '£',
-                'created_at' => '2023-03-23 08:19:21',
-                'updated_at' => '2023-03-23 08:19:21',
+                'created_at' => '2025-10-23 08:19:21',
+                'updated_at' => '2025-10-23 08:19:21',
             ),
             3 =>
                 array (
                     'id' => 4,
                     'name' => 'Euro',
                     'symbol' => '€',
-                    'created_at' => '2023-03-23 08:19:21',
-                    'updated_at' => '2023-03-23 08:19:21',
+                    'created_at' => '2025-10-23 08:19:21',
+                    'updated_at' => '2025-10-23 08:19:21',
                 ),
         ));
 

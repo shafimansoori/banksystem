@@ -30,8 +30,8 @@ class BankAccountsTableSeeder extends Seeder
                 'user_id' => 1,
                 'bank_id' => 1,
                 'bank_location_id' => 1,
-                'created_at' => '2023-03-23 08:19:21',
-                'updated_at' => '2023-03-24 10:10:29',
+                'created_at' => '2025-10-23 08:19:21',
+                'updated_at' => '2025-10-24 10:10:29',
                 'deleted_at' => NULL,
             ),
             1 =>
@@ -44,8 +44,8 @@ class BankAccountsTableSeeder extends Seeder
                 'user_id' => 1,
                 'bank_id' => 2,
                 'bank_location_id' => 2,
-                'created_at' => '2023-03-05 08:19:21',
-                'updated_at' => '2023-03-05 22:21:22',
+                'created_at' => '2025-10-05 08:19:21',
+                'updated_at' => '2025-10-05 22:21:22',
                 'deleted_at' => NULL,
             ),
             2 =>
@@ -58,8 +58,8 @@ class BankAccountsTableSeeder extends Seeder
                 'user_id' => 1,
                 'bank_id' => 1,
                 'bank_location_id' => 1,
-                'created_at' => '2023-03-05 20:59:26',
-                'updated_at' => '2023-03-05 22:21:23',
+                'created_at' => '2025-10-05 20:59:26',
+                'updated_at' => '2025-10-05 22:21:23',
                 'deleted_at' => NULL,
             ),
         ));

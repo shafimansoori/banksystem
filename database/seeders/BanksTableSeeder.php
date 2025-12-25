@@ -26,8 +26,8 @@ class BanksTableSeeder extends Seeder
                 'name' => 'Ziraat Bankasi',
                 'picture' => '',
                 'code' => 'TRZR',
-                'created_at' => '2022-03-23 08:19:21',
-                'updated_at' => '2022-03-23 08:19:21',
+                'created_at' => '2025-03-23 08:19:21',
+                'updated_at' => '2025-03-23 08:19:21',
                 'deleted_at' => NULL,
             ),
             1 =>
@@ -36,8 +36,8 @@ class BanksTableSeeder extends Seeder
                 'name' => 'Vakifkatilim Bankasi',
                 'picture' => '',
                 'code' => 'TRVK',
-                'created_at' => '2022-03-23 08:19:21',
-                'updated_at' => '2022-03-23 08:19:21',
+                'created_at' => '2025-03-23 08:19:21',
+                'updated_at' => '2025-03-23 08:19:21',
                 'deleted_at' => NULL,
             ),
             2 =>
@@ -46,8 +46,8 @@ class BanksTableSeeder extends Seeder
                     'name' => 'Kuveyt Bankasi',
                     'picture' => '',
                     'code' => 'TRK',
-                    'created_at' => '2023-03-23 08:19:21',
-                    'updated_at' => '2023-03-23 08:19:21',
+                    'created_at' => '2025-10-23 08:19:21',
+                    'updated_at' => '2025-10-23 08:19:21',
                     'deleted_at' => NULL,
                 ),
         ));

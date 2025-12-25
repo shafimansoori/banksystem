@@ -26,8 +26,8 @@ class CardType extends Seeder
                 'name' => 'Mastercard',
                 'picture' => 'https://www.mastercard.us/content/dam/mccom/global/logos/logo-mastercard-mobile.svg',
                 'style' => 'bg-card-mastercard',
-                'created_at' => '2023-03-30 13:16:19',
-                'updated_at' => '2023-03-30 13:16:19',
+                'created_at' => '2025-10-30 13:16:19',
+                'updated_at' => '2025-10-30 13:16:19',
             ),
             1 =>
             array (
@@ -35,18 +35,18 @@ class CardType extends Seeder
                 'name' => 'VISA',
                 'picture' => 'https://i.pinimg.com/originals/55/a3/c2/55a3c2e6e01843e209cf2c2b279363b9.png',
                 'style' => 'bg-card-visa',
-                'created_at' => '2023-03-30 13:16:19',
-                'updated_at' => '2023-03-30 13:16:19',
+                'created_at' => '2025-10-30 13:16:19',
+                'updated_at' => '2025-10-30 13:16:19',
             ),
 
             2 =>
                 array (
                     'id' => 3,
                     'name' => 'Paypal',
-                    'picture' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/1200px-PayPal.svg.png?20230314142951',
+                    'picture' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/1200px-PayPal.svg.png?20250314142951',
                     'style' => 'bg-card-paypal',
-                    'created_at' => '2023-03-30 13:16:19',
-                    'updated_at' => '2023-03-30 13:16:19',
+                    'created_at' => '2025-10-30 13:16:19',
+                    'updated_at' => '2025-10-30 13:16:19',
                 ),
 
         ));

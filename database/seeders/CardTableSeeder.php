@@ -33,8 +33,8 @@ class CardTableSeeder extends Seeder
                 'cvv' => '506',
                 'billing_address' => '34, Turkey Istanbul, Esenyurt',
                 'zip_code' => '23401',
-                'created_at' => '2023-03-30 12:16:11',
-                'updated_at' => '2023-03-30 12:16:11',
+                'created_at' => '2025-10-30 12:16:11',
+                'updated_at' => '2025-10-30 12:16:11',
                 'deleted_at' => NULL,
             ),
         ));

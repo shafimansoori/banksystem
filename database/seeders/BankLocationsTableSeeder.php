@@ -26,8 +26,8 @@ class BankLocationsTableSeeder extends Seeder
                 'name' => 'Turkey',
                 'bank_id' => 1,
                 'currency_id' => 2,
-                'created_at' => '2023-03-23 08:03:21',
-                'updated_at' => '2023-03-23 08:03:21',
+                'created_at' => '2025-10-23 08:03:21',
+                'updated_at' => '2025-10-23 08:03:21',
                 'deleted_at' => NULL,
             ),
             1 =>
@@ -36,8 +36,8 @@ class BankLocationsTableSeeder extends Seeder
                 'name' => 'Turkey',
                 'bank_id' => 2,
                 'currency_id' => 1,
-                'created_at' => '2023-03-23 08:03:21',
-                'updated_at' => '2023-03-23 08:03:21',
+                'created_at' => '2025-10-23 08:03:21',
+                'updated_at' => '2025-10-23 08:03:21',
                 'deleted_at' => NULL,
             ),
             2 =>
@@ -46,8 +46,8 @@ class BankLocationsTableSeeder extends Seeder
                 'name' => 'Turkey',
                 'bank_id' => 1,
                 'currency_id' => 2,
-                'created_at' => '2023-03-23 08:03:21',
-                'updated_at' => '2023-03-23 08:03:21',
+                'created_at' => '2025-10-23 08:03:21',
+                'updated_at' => '2025-10-23 08:03:21',
                 'deleted_at' => NULL,
             ),
         ));

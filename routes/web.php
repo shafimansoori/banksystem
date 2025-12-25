@@ -143,5 +143,7 @@ Route::group(array('middleware' => 'auth'), static function(){
 
     // Chatbot
     Route::post('/chatbot/respond', [ChatBotController::class, 'respond'])->name('chatbot.respond');
+    Route::get('/chatbot/history', [ChatBotController::class, 'getHistory'])->name('chatbot.history');
+    Route::delete('/chatbot/history', [ChatBotController::class, 'clearHistory'])->name('chatbot.clear');
 
 });
