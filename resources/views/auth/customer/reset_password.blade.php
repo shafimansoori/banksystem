@@ -27,7 +27,7 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
-					<img src="../images/img-01.png" alt="IMG">
+					<img src="https://static.vecteezy.com/system/resources/previews/011/107/359/original/bank-3d-icon-illustration-png.png" alt="IMG">
 				</div>
 
                 <form class="login100-form validate-form" method="POST" action="{{ route("reset_account") }}">

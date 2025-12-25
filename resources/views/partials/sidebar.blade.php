@@ -52,6 +52,14 @@
                     </a>
                 </li>
 
+                <!-- Announcements -->
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark" href="{{route('announcements')}}" aria-expanded="false">
+                        <i class="mdi mdi-bullhorn"></i>
+                        <span class="hide-menu">Announcements</span>
+                    </a>
+                </li>
+
                 <!-- Settings -->
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark" href="{{route('settings')}}" aria-expanded="false">
@@ -64,6 +72,16 @@
                     <li class="sidebar-divider mt-3 mb-3"></li>
                     <li class="nav-small-cap">
                         <span class="hide-menu">ADMINISTRATION</span>
+                    </li>
+                @endif
+
+                <!-- Manage Announcements (Admin Only) -->
+                @if(auth()->user()->hasRole('System-Admin'))
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark" href="{{ route('manage_announcements') }}" aria-expanded="false">
+                            <i class="mdi mdi-bulletin-board"></i>
+                            <span class="hide-menu">Manage Announcements</span>
+                        </a>
                     </li>
                 @endif
 

@@ -15,6 +15,7 @@ use App\Http\Controllers\CardTypeController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\BankLocationController;
 use App\Http\Controllers\CardTransactionController;
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\SandBox\SmsController;
 
 /*
@@ -63,7 +64,11 @@ Route::post('/sandbox/process/sms',[SmsController::class,'processMessage'])->nam
 
 // //  str, array
 Route::get('/', function () {
-    return redirect()->route('login');
+    $announcements = \App\Models\Announcement::where('is_active', true)
+        ->orderBy('created_at', 'desc')
+        ->limit(5)
+        ->get();
+    return view('home', compact('announcements'));
 })->name('index');
 
 
@@ -145,5 +150,14 @@ Route::group(array('middleware' => 'auth'), static function(){
     Route::post('/chatbot/respond', [ChatBotController::class, 'respond'])->name('chatbot.respond');
     Route::get('/chatbot/history', [ChatBotController::class, 'getHistory'])->name('chatbot.history');
     Route::delete('/chatbot/history', [ChatBotController::class, 'clearHistory'])->name('chatbot.clear');
+
+    // Announcements
+    Route::get('/announcements', [AnnouncementController::class, 'index'])->name('announcements');
+    Route::get('/manage/announcements', [AnnouncementController::class, 'manage'])->name('manage_announcements');
+    Route::post('/announcement/save', [AnnouncementController::class, 'store'])->name('save_announcement');
+    Route::post('/announcement/update/{id}', [AnnouncementController::class, 'update'])->name('update_announcement');
+    Route::get('/announcement/toggle/{id}', [AnnouncementController::class, 'toggleStatus'])->name('toggle_announcement');
+    Route::get('/announcement/delete/{id}', [AnnouncementController::class, 'destroy'])->name('delete_announcement');
+    Route::get('/announcement/restore/{id}', [AnnouncementController::class, 'restore'])->name('restore_announcement');
 
 });
