@@ -31,7 +31,7 @@
 					<img src="https://static.vecteezy.com/system/resources/previews/011/107/359/original/bank-3d-icon-illustration-png.png" alt="IMG">
 				</div>
 
-                <form class="login100-form validate-form" method="POST" action="{{ route("login") }}">
+                <form class="login100-form validate-form" method="POST" action="{{ route("login.post") }}">
                     @csrf
 					<span class="login100-form-title">
 						Account Login
@@ -80,8 +80,13 @@
 						</a>
 					</div>
 
-					<div class="text-center p-t-136">
-
+					<div class="text-center p-t-30">
+						<span class="txt1">
+							Don't have an account?
+						</span>
+						<a class="txt2" href="{{ route('register') }}">
+							Sign Up
+						</a>
 					</div>
 				</form>
 			</div>

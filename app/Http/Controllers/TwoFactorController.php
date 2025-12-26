@@ -76,18 +76,12 @@ class TwoFactorController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'User not found'
-            ], 404);
+            return back()->with('error', 'User not found');
         }
 
         // Check if code exists
         if (!$user->two_factor_code) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'No verification code found. Please request a new one.'
-            ], 400);
+            return back()->with('error', 'No verification code found. Please request a new one.');
         }
 
         // Check if code expired
@@ -96,18 +90,12 @@ class TwoFactorController extends Controller
             $user->two_factor_expires_at = null;
             $user->save();
 
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Verification code expired. Please request a new one.'
-            ], 400);
+            return back()->with('error', 'Verification code expired. Please request a new one.');
         }
 
         // Verify code
         if ($user->two_factor_code !== $request->code) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Invalid verification code'
-            ], 401);
+            return back()->with('error', 'Invalid verification code');
         }
 
         // Clear the code
@@ -115,14 +103,13 @@ class TwoFactorController extends Controller
         $user->two_factor_expires_at = null;
         $user->save();
 
+        // Clear session
+        Session::forget('2fa:user:email');
+
         // Log the user in
         \Auth::login($user);
 
-        return response()->json([
-            'status' => 'success',
-            'message' => '2FA verification successful',
-            'redirect' => route('dashboard')
-        ]);
+        return redirect()->route('dashboard')->with('success', '2FA verification successful');
     }
 
     /**

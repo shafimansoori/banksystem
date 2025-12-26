@@ -37,44 +37,37 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $request->remember)) {
 
             $user = Auth::user();
-            //Check if user is a customer or admin
-            if( $user?->can('login') ){
 
-                // Check if 2FA is enabled for this user
-                if ($user->two_factor_enabled) {
-                    // Logout temporarily
-                    Auth::logout();
+            // Check if 2FA is enabled for this user
+            if ($user->two_factor_enabled) {
+                // Logout temporarily
+                Auth::logout();
 
-                    // Generate and send 2FA code
-                    $code = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
-                    $user->two_factor_code = $code;
-                    $user->two_factor_expires_at = \Carbon\Carbon::now()->addMinutes(5);
-                    $user->save();
+                // Generate and send 2FA code
+                $code = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+                $user->two_factor_code = $code;
+                $user->two_factor_expires_at = \Carbon\Carbon::now()->addMinutes(5);
+                $user->save();
 
-                    // Send email (or show code in debug mode)
-                    try {
-                        Mail::raw("Your 2FA verification code is: {$code}\n\nThis code will expire in 5 minutes.", function ($message) use ($user) {
-                            $message->to($user->email)
-                                ->subject('Bank System - Two-Factor Authentication Code');
-                        });
-                    } catch (\Exception $e) {
-                        \Log::error('2FA Email Error: ' . $e->getMessage());
-                    }
-
-                    // Store user email in session for 2FA page
-                    session(['2fa:user:email' => $user->email]);
-
-                    // Redirect to 2FA verification page
-                    return redirect()->route('2fa.verify')->with('info', '2FA code sent to your email. Code: ' . (config('app.debug') ? $code : '******'));
+                // Send email (or show code in debug mode)
+                try {
+                    Mail::raw("Your 2FA verification code is: {$code}\n\nThis code will expire in 5 minutes.", function ($message) use ($user) {
+                        $message->to($user->email)
+                            ->subject('Bank System - Two-Factor Authentication Code');
+                    });
+                } catch (\Exception $e) {
+                    \Log::error('2FA Email Error: ' . $e->getMessage());
                 }
 
-                // Log them in (no 2FA)
-                return redirect('/dashboard');
+                // Store user email in session for 2FA page
+                session(['2fa:user:email' => $user->email]);
+
+                // Redirect to 2FA verification page
+                return redirect()->route('2fa.verify')->with('info', '2FA code sent to your email. Code: ' . (config('app.debug') ? $code : '******'));
             }
 
-            Auth::logout();
-            return back()->withInput()->with('error', 'Unauthorized access');
-
+            // Log them in (no 2FA)
+            return redirect('/dashboard');
 
         }
 

@@ -39,6 +39,12 @@ Route::get('/login', static function () {
     return view('auth.customer.login');
 })->name("login");
 
+// Login POST - handled by AuthController with 2FA support
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+
+// Registration routes
+Route::get('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'register']);
 
 // back to login screen from bank dashboard page
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');

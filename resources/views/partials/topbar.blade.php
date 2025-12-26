@@ -22,7 +22,7 @@
                 <!-- User Profile -->
                 <li class="nav-item dropdown user-dropdown">
                     <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="rounded-circle user-avatar" src="{{ url('') }}/assets/images/users/oms.jpeg" alt="user" width="40" height="40">
+                        <img class="rounded-circle user-avatar" src="{{ url('') }}/assets/images/users/shafi.jpg" alt="user" width="40" height="40">
                         <span class="user-name ml-2 d-none d-lg-inline">{{ auth()->user()->first_name }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right user-dd animated fadeIn">

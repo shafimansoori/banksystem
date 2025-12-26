@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             CurrenciesTableSeeder::class,
             RolesTableSeeder::class,
             PermissionsTableSeeder::class,
+            RoleHasPermissionsTableSeeder::class, // Rollere izin atama
             BanksTableSeeder::class,
             BankLocationsTableSeeder::class,
             CardType::class, // CardType seeder'ı
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
             BankAccountsTableSeeder::class,
             CardTableSeeder::class,
             BankTransactionsTableSeeder::class,
+            SuspiciousTransactionsSeeder::class, // Şüpheli işlemler (Fraud Detection)
         ]);
     }
 }

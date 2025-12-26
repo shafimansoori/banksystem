@@ -82,9 +82,8 @@
 <div class="row">
     <div class="col-md-12 h6">
         Cards
-        @can('add-card')
             <button type="button" data-toggle="modal" data-target="#addCardModal" class="btn btn-primary float-right"> Add Card </button>
-        @endcan
+
     </div>
 
 
@@ -214,7 +213,6 @@
 
 
 
-@can('add-card')
 
 {{-- Add The Model for the transaction adding --}}
 
@@ -391,8 +389,6 @@
 
     </div>
 </div>
-
-@endcan
 
 
 @can('edit-card')

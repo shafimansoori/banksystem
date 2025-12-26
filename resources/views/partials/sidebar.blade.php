@@ -142,7 +142,7 @@
     <!-- User Profile Section -->
     <div class="sidebar-user-section">
         <div class="sidebar-user-info">
-            <img class="sidebar-user-avatar" src="{{ url('') }}/assets/images/users/oms.jpeg" alt="user">
+            <img class="sidebar-user-avatar" src="{{ url('') }}/assets/images/users/shafi.jpg" alt="user">
             <div class="sidebar-user-details">
                 <span class="sidebar-user-name">{{ auth()->user()->first_name }}</span>
                 <span class="sidebar-user-email">{{ auth()->user()->email }}</span>

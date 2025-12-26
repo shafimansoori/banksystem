@@ -22,19 +22,19 @@ class ModelHasRolesTableSeeder extends Seeder
         \DB::table('model_has_roles')->insert(array (
             0 =>
             array (
-                'role_id' => 1,
+                'role_id' => 2, // System-Admin role for admin@gmail.com
                 'model_type' => 'App\\Models\\User',
                 'model_id' => 1,
             ),
             1 =>
             array (
-                'role_id' => 2,
+                'role_id' => 1, // Customer role for ali@gmail.com
                 'model_type' => 'App\\Models\\User',
                 'model_id' => 2,
             ),
             2 =>
             array (
-                'role_id' => 3,
+                'role_id' => 3, // customer-care role for shafiullah1@gmail.com
                 'model_type' => 'App\\Models\\User',
                 'model_id' => 3,
             ),

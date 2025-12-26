@@ -6,7 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class BankTransaction extends Model
 {
-    //
+    protected $fillable = [
+        'user_id',
+        'bank_account_id',
+        'transaction_code',
+        'narration',
+        'type',
+        'amount',
+        'status',
+        'risk_level',
+        'analysis_result',
+        'is_flagged',
+        'created_at',
+        'updated_at',
+    ];
 
     public function bank_account()
     {

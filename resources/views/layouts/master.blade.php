@@ -322,6 +322,81 @@
                 bottom: 15px;
             }
         }
+
+        /* Laravel Tailwind Pagination Fix */
+        nav[aria-label="Pagination Navigation"] {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        nav[aria-label="Pagination Navigation"] .flex.justify-between.flex-1 {
+            display: none !important;
+        }
+
+        nav[aria-label="Pagination Navigation"] span.relative.z-0 {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        nav[aria-label="Pagination Navigation"] a,
+        nav[aria-label="Pagination Navigation"] span[aria-current="page"] span,
+        nav[aria-label="Pagination Navigation"] span[aria-disabled="true"] span {
+            padding: 6px 12px !important;
+            font-size: 14px !important;
+            line-height: 1.5 !important;
+            color: #7c8798 !important;
+            background-color: #fff !important;
+            border: 1px solid #dee2e6 !important;
+            text-decoration: none !important;
+            margin-left: -1px;
+            border-radius: 0 !important;
+        }
+
+        nav[aria-label="Pagination Navigation"] a:first-child,
+        nav[aria-label="Pagination Navigation"] span.relative.z-0 > a:first-child {
+            border-top-left-radius: 4px !important;
+            border-bottom-left-radius: 4px !important;
+        }
+
+        nav[aria-label="Pagination Navigation"] a:last-child,
+        nav[aria-label="Pagination Navigation"] span.relative.z-0 > span:last-child span {
+            border-top-right-radius: 4px !important;
+            border-bottom-right-radius: 4px !important;
+        }
+
+        nav[aria-label="Pagination Navigation"] a:hover {
+            color: #5a6268 !important;
+            background-color: #e9ecef !important;
+            border-color: #dee2e6 !important;
+        }
+
+        nav[aria-label="Pagination Navigation"] span[aria-current="page"] span {
+            color: #fff !important;
+            background-color: #7460ee !important;
+            border-color: #7460ee !important;
+        }
+
+        nav[aria-label="Pagination Navigation"] span[aria-disabled="true"] span {
+            color: #6c757d !important;
+            cursor: default;
+        }
+
+        /* SVG arrow icon size fix */
+        nav[aria-label="Pagination Navigation"] svg {
+            width: 14px !important;
+            height: 14px !important;
+        }
+
+        nav[aria-label="Pagination Navigation"] a[rel="prev"],
+        nav[aria-label="Pagination Navigation"] a[aria-label*="Previous"],
+        nav[aria-label="Pagination Navigation"] span[aria-label*="Next"] span {
+            padding: 6px 10px !important;
+        }
+
+        /* Hide the text info on small screens */
+        nav[aria-label="Pagination Navigation"] > div > div:first-child {
+            display: none;
+        }
     </style>
 
 </head>
@@ -354,7 +429,7 @@
                 <span>Online Banking</span>
             </a>
             <a href="{{route('profile')}}" class="mobile-user-avatar">
-                <img src="{{ url('') }}/assets/images/users/oms.jpeg" alt="user" />
+                <img src="{{ url('') }}/assets/images/users/shafi.jpg" alt="user" />
             </a>
         </header>
         <!-- Mobile Overlay -->

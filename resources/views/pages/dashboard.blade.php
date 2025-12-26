@@ -100,76 +100,114 @@
 <script>
 
 function loadDepositChart(){
-
     var ctx = document.getElementById('depositsChart').getContext('2d');
-    var myLineChart = new Chart(ctx,{
-        "type":"line",
-        "data":{
-            "labels":[
-                @foreach($bankDepositDates as $bankDepositDate)
-                    '{{$bankDepositDate->format('D d M, Y')}}',
-                @endforeach
-            ],
-            "datasets":[
-                {
-                    "label":"Amount","data":[
-                        @foreach($bankDepositAmounts as $bankDepositAmount)
-                            '{{$bankDepositAmount}}',
-                        @endforeach
-                    ],
-                    "fill":true,
-                    "borderColor":"rgb(254, 121, 79)",
-                    "lineTension":0.1
-                }
-            ]
-        },
-        "options":{
 
+    var labels = [
+        @foreach($bankDepositDates as $bankDepositDate)
+            '{{$bankDepositDate->format('D d M')}}',
+        @endforeach
+    ];
+
+    var data = [
+        @foreach($bankDepositAmounts as $bankDepositAmount)
+            {{$bankDepositAmount}},
+        @endforeach
+    ];
+
+    // Check if no data
+    if (labels.length === 0) {
+        labels = ['No Data'];
+        data = [0];
+    }
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Deposit Amount',
+                data: data,
+                fill: true,
+                backgroundColor: 'rgba(254, 121, 79, 0.2)',
+                borderColor: 'rgb(254, 121, 79)',
+                tension: 0.1,
+                pointBackgroundColor: 'rgb(254, 121, 79)',
+                pointRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true
+                }
+            }
         }
     });
-
-
 }
 
 
 function loadExpensesChart(){
-
     var ctx = document.getElementById('expensesChart').getContext('2d');
-    var myChart = new Chart(ctx, {
+
+    var labels = [
+        @foreach($bankExpensesDates as $bankExpensesDate)
+            '{{$bankExpensesDate->format('D d M')}}',
+        @endforeach
+    ];
+
+    var data = [
+        @foreach($bankExpensesAmounts as $bankExpensesAmount)
+            {{$bankExpensesAmount}},
+        @endforeach
+    ];
+
+    // Check if no data
+    if (labels.length === 0) {
+        labels = ['No Data'];
+        data = [0];
+    }
+
+    new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: [
-                @foreach($bankExpensesDates as $bankExpensesDate)
-                    '{{$bankExpensesDate->format('D d M, Y')}}',
-                @endforeach
-            ],
+            labels: labels,
             datasets: [{
-                label: 'Amount',
-                data: [
-                    @foreach($bankExpensesAmounts as $bankExpensesAmount)
-                        '{{$bankExpensesAmount}}',
-                    @endforeach
-                ],
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                label: 'Expense Amount',
+                data: data,
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
                 borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 0.5
+                borderWidth: 1
             }]
         },
         options: {
+            responsive: true,
+            maintainAspectRatio: true,
             scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true
+                }
             }
         }
     });
-
 }
 
-loadDepositChart();
-loadExpensesChart();
+// Wait for DOM to be ready
+document.addEventListener('DOMContentLoaded', function() {
+    loadDepositChart();
+    loadExpensesChart();
+});
 
 </script>
 
