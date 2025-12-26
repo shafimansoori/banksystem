@@ -23,7 +23,7 @@ class BankAccountsTableSeeder extends Seeder
             0 =>
             array (
                 'id' => 1,
-                'name' => 'Omer MEMES',
+                'name' => 'Omer Test',
                 'number' => 'TRO00112231',
                 'available_balance' => -195.0,
                 'ledger_balance' => 1100.0,

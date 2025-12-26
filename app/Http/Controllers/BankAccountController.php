@@ -11,6 +11,7 @@ use App\Models\Bank;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Services\TransactionAnalyzer;
 
 
 class BankAccountController extends Controller
@@ -124,6 +125,14 @@ class BankAccountController extends Controller
 
             $bankAccount->save();
 
+            // Analyze transaction using AI/Text Mining
+            $analyzer = new TransactionAnalyzer();
+            $analysis = $analyzer->analyzeTransaction(
+                $request->narration ?? '',
+                $request->amount,
+                $request->type
+            );
+
             $bankTransaction = new BankTransaction();
             $bankTransaction->transaction_code = $request->transaction_code;
             $bankTransaction->narration = $request->narration;
@@ -132,6 +141,9 @@ class BankAccountController extends Controller
             $bankTransaction->bank_account_id = $request->bank_account_id;
             $bankTransaction->status = $request->status;
             $bankTransaction->user_id = $bankAccount->user_id;
+            $bankTransaction->risk_level = $analysis['risk_level'];
+            $bankTransaction->analysis_result = $analysis['analysis'];
+            $bankTransaction->is_flagged = $analysis['is_flagged'];
             $bankTransaction->created_at = Carbon::parse($request->date);
             $bankTransaction->updated_at = Carbon::parse($request->date);
             $bankTransaction->save();
@@ -278,6 +290,25 @@ class BankAccountController extends Controller
 
         }
 
+    }
+
+    public function flaggedTransactions()
+    {
+        $transactions = BankTransaction::with('user', 'bank_account')
+            ->where('is_flagged', true)
+            ->orderBy('risk_level', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
+
+        $totalFlagged = BankTransaction::where('is_flagged', true)->count();
+
+        $stats = [
+            'high' => BankTransaction::where('risk_level', 'high')->count(),
+            'medium' => BankTransaction::where('risk_level', 'medium')->count(),
+            'low' => BankTransaction::where('risk_level', 'low')->count(),
+        ];
+
+        return view('pages.flagged_transactions', compact('transactions', 'totalFlagged', 'stats'));
     }
 
 }

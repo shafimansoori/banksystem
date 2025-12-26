@@ -44,15 +44,34 @@
                             </div>
 
                             {{-- Monthly Account Statement Alert --}}
-                            <div class="row mt-4 mb-5">
+                            <div class="row mt-4">
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-right">
                                         Monthly Account Statement
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-left">
-                                    <input type="checkbox" 
-                                            name="monthly_notification" 
+                                    <input type="checkbox"
+                                            name="monthly_notification"
                                             checked
                                     />
+                                </div>
+                            </div>
+
+                            {{-- Two-Factor Authentication --}}
+                            <div class="row mt-4 mb-5">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-right">
+                                    <i class="fa fa-shield"></i> Two-Factor Authentication (2FA)
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-left">
+                                    <form action="{{ route('2fa.toggle') }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm {{ auth()->user()->two_factor_enabled ? 'btn-success' : 'btn-secondary' }}">
+                                            <i class="fa fa-{{ auth()->user()->two_factor_enabled ? 'check' : 'times' }}"></i>
+                                            {{ auth()->user()->two_factor_enabled ? 'Enabled' : 'Disabled' }}
+                                        </button>
+                                    </form>
+                                    @if(auth()->user()->two_factor_enabled)
+                                        <small class="text-light d-block mt-1">Email verification required on login</small>
+                                    @endif
                                 </div>
                             </div>
 

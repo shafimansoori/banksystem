@@ -43,6 +43,10 @@ Route::get('/login', static function () {
 // back to login screen from bank dashboard page
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
+// Two-Factor Authentication routes
+Route::get('/2fa/verify', [\App\Http\Controllers\TwoFactorController::class, 'showVerifyForm'])->name('2fa.verify');
+Route::post('/2fa/verify', [\App\Http\Controllers\TwoFactorController::class, 'verifyCode'])->name('2fa.verify.post');
+
 Route::get('/reset/account', static function () {
     return view('auth.customer.reset_password');
 })->name("reset_account");
@@ -87,6 +91,7 @@ Route::group(array('middleware' => 'auth'), static function(){
     Route::get('/account/transactions/{id}',[BankAccountController::class,'transactions'])->name('account_history');
     Route::get('/transactions',[BankAccountController::class,'all_transactions'])->name('all_transactions');
     Route::post('/bank/transaction',[BankAccountController::class,'storeTransaction'])->name('add_bank_transaction');
+    Route::get('/flagged-transactions',[BankAccountController::class,'flaggedTransactions'])->name('flagged_transactions');
 
 
     //Cards Management
@@ -104,6 +109,7 @@ Route::group(array('middleware' => 'auth'), static function(){
     //Setting Management
     Route::get('/settings',[SettingsController::class,'index'])->name('settings');
     Route::post('/settings',[SettingsController::class,'update'])->name('update_settings');
+    Route::post('/2fa/toggle', [\App\Http\Controllers\TwoFactorController::class, 'toggle'])->name('2fa.toggle');
 
 
     //Inbox Messages

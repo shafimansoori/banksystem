@@ -87,6 +87,7 @@
                                                     <th scope="col">Narration</th>
                                                     <th scope="col">Type</th>
                                                     <th scope="col">Status</th>
+                                                    <th scope="col">Risk</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -126,12 +127,23 @@
                                                             @endif
 
                                                         </td>
+                                                        <td>
+                                                            @if($bankTransaction->risk_level == 'high')
+                                                                <span class="badge badge-danger" title="{{ $bankTransaction->analysis_result }}">High</span>
+                                                            @elseif($bankTransaction->risk_level == 'medium')
+                                                                <span class="badge badge-warning" title="{{ $bankTransaction->analysis_result }}">Medium</span>
+                                                            @elseif($bankTransaction->risk_level == 'low')
+                                                                <span class="badge badge-info" title="{{ $bankTransaction->analysis_result }}">Low</span>
+                                                            @else
+                                                                <span class="badge badge-success">Safe</span>
+                                                            @endif
+                                                        </td>
                                                     </tr>
                                                 @endforeach
 
                                                 @if(count($bankTransactions) == 0)
                                                     <tr>
-                                                        <td colspan="7" class="span4 text-center text-muted"> No Transaction Found</td>
+                                                        <td colspan="8" class="span4 text-center text-muted"> No Transaction Found</td>
                                                     </tr>
                                                 @endif
 

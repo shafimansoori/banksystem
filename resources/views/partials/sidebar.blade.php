@@ -85,6 +85,16 @@
                     </li>
                 @endif
 
+                <!-- Flagged Transactions (Admin Only) -->
+                @if(auth()->user()->hasRole('System-Admin'))
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark" href="{{ route('flagged_transactions') }}" aria-expanded="false">
+                            <i class="mdi mdi-alert-octagon text-danger"></i>
+                            <span class="hide-menu">Suspicious Transactions</span>
+                        </a>
+                    </li>
+                @endif
+
                 <!-- Users -->
                 @can('list-users')
                     <li class="sidebar-item">
