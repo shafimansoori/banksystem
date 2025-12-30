@@ -497,7 +497,7 @@
             <div class="row g-2 mt-1">
                 <div class="col-4 px-1">
                     <button class="btn btn-outline-primary btn-sm w-100 quick-btn" data-message="Toplam bakiyem ne kadar?" style="font-size: 11px; padding: 6px 4px;">
-                        <i class="fas fa-wallet"></i><br><span style="font-size: 10px;">Bakiye</span>
+                        <i class="fas fa-folder-open"></i><br><span style="font-size: 10px;">Bakiye</span>
                     </button>
                 </div>
                 <div class="col-4 px-1">
