@@ -41,9 +41,12 @@
                             <i class="ti-settings mr-2"></i> Settings
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-danger" href="{{route('logout')}}">
+                        <a class="dropdown-item text-danger" href="#" onclick="event.preventDefault(); document.getElementById('logout-form-topbar').submit();">
                             <i class="ti-power-off mr-2"></i> Logout
                         </a>
+                        <form id="logout-form-topbar" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </div>
                 </li>
             </ul>

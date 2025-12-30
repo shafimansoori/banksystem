@@ -61,6 +61,7 @@ class AuthController extends Controller
 
                 // Store user email in session for 2FA page
                 session(['2fa:user:email' => $user->email]);
+                session()->save(); // Force session save
 
                 // Redirect to 2FA verification page
                 return redirect()->route('2fa.verify')->with('info', '2FA code sent to your email. Code: ' . (config('app.debug') ? $code : '******'));

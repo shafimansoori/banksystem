@@ -55,6 +55,17 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'two_factor_enabled' => 'boolean',
+        'two_factor_expires_at' => 'datetime',
+    ];
+
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'two_factor_enabled' => true,
     ];
 
 

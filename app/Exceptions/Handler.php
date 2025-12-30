@@ -27,4 +27,26 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    /**
+     * Render an exception into an HTTP response.
+     */
+    public function render($request, Throwable $exception)
+    {
+        // Handle CSRF token mismatch (419)
+        if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
+            // If it's a POST/PUT/DELETE request, redirect back with error
+            if ($request->isMethod('post') || $request->isMethod('put') || $request->isMethod('delete')) {
+                return redirect()->back()
+                    ->withInput($request->except(['password', 'password_confirmation', '_token']))
+                    ->with('error', 'Oturumunuzun süresi doldu. Lütfen tekrar deneyin.');
+            }
+
+            // For GET requests, redirect to login
+            return redirect()->route('login')
+                ->with('error', 'Oturumunuzun süresi doldu. Lütfen tekrar giriş yapın.');
+        }
+
+        return parent::render($request, $exception);
+    }
 }

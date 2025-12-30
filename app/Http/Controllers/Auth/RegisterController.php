@@ -63,6 +63,7 @@ class RegisterController extends Controller
             'address' => $request->address ?? '',
             'description' => 'Customer Account',
             'picture' => 'https://cdn1.iconfinder.com/data/icons/bokbokstars-121-classic-stock-icons-1/512/person-man.png',
+            'two_factor_enabled' => true,
         ]);
 
         // Assign Customer role
@@ -71,9 +72,27 @@ class RegisterController extends Controller
             $user->assignRole($customerRole);
         }
 
-        // Login the user
-        Auth::login($user);
+        // Generate and send 2FA code for new user
+        $code = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+        $user->two_factor_code = $code;
+        $user->two_factor_expires_at = \Carbon\Carbon::now()->addMinutes(5);
+        $user->save();
 
-        return redirect()->route('dashboard')->with('success', 'Account created successfully! Welcome to Bank System.');
+        // Send 2FA email
+        try {
+            \Mail::raw("Welcome to Bank System!\n\nYour 2FA verification code is: {$code}\n\nThis code will expire in 5 minutes.", function ($message) use ($user) {
+                $message->to($user->email)
+                    ->subject('Bank System - Email Verification Code');
+            });
+        } catch (\Exception $e) {
+            \Log::error('2FA Email Error for new user: ' . $e->getMessage());
+        }
+
+        // Store user email in session for 2FA page
+        session(['2fa:user:email' => $user->email]);
+        session()->save();
+
+        // Redirect to 2FA verification page
+        return redirect()->route('2fa.verify')->with('success', 'Account created successfully! Please verify your email with the 2FA code. Code: ' . (config('app.debug') ? $code : '******'));
     }
 }

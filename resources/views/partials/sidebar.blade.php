@@ -155,9 +155,12 @@
             <a href="{{route('settings')}}" class="sidebar-user-action" title="Settings">
                 <i class="mdi mdi-settings"></i>
             </a>
-            <a href="{{route('logout')}}" class="sidebar-user-action text-danger" title="Logout">
+            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form-sidebar').submit();" class="sidebar-user-action text-danger" title="Logout">
                 <i class="mdi mdi-logout"></i>
             </a>
+            <form id="logout-form-sidebar" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
         </div>
     </div>
 </aside>

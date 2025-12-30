@@ -46,9 +46,6 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::get('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'register']);
 
-// back to login screen from bank dashboard page
-Route::get('/logout',[AuthController::class,'logout'])->name('logout');
-
 // Two-Factor Authentication routes
 Route::get('/2fa/verify', [\App\Http\Controllers\TwoFactorController::class, 'showVerifyForm'])->name('2fa.verify');
 Route::post('/2fa/verify', [\App\Http\Controllers\TwoFactorController::class, 'verifyCode'])->name('2fa.verify.post');

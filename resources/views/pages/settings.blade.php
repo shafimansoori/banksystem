@@ -62,16 +62,13 @@
                                     <i class="fa fa-shield"></i> Two-Factor Authentication (2FA)
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-left">
-                                    <form action="{{ route('2fa.toggle') }}" method="POST" style="display: inline;">
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm {{ auth()->user()->two_factor_enabled ? 'btn-success' : 'btn-secondary' }}">
-                                            <i class="fa fa-{{ auth()->user()->two_factor_enabled ? 'check' : 'times' }}"></i>
-                                            {{ auth()->user()->two_factor_enabled ? 'Enabled' : 'Disabled' }}
-                                        </button>
-                                    </form>
-                                    @if(auth()->user()->two_factor_enabled)
-                                        <small class="text-light d-block mt-1">Email verification required on login</small>
-                                    @endif
+                                    <span class="badge badge-success" style="font-size: 14px; padding: 8px 12px;">
+                                        <i class="fa fa-lock"></i> Always Enabled
+                                    </span>
+                                    <small class="text-light d-block mt-2">
+                                        <i class="fa fa-info-circle"></i> Two-factor authentication is mandatory for all accounts to ensure maximum security.
+                                        You will receive a verification code via email on every login.
+                                    </small>
                                 </div>
                             </div>
 

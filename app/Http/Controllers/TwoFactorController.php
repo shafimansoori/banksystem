@@ -113,15 +113,12 @@ class TwoFactorController extends Controller
     }
 
     /**
-     * Toggle 2FA for user
+     * Toggle 2FA for user (DISABLED - 2FA is mandatory)
      */
     public function toggle(Request $request)
     {
-        $user = auth()->user();
-        $user->two_factor_enabled = !$user->two_factor_enabled;
-        $user->save();
-
-        return back()->with('success', '2FA has been ' . ($user->two_factor_enabled ? 'enabled' : 'disabled'));
+        // 2FA is now mandatory for all users - cannot be toggled
+        return back()->with('error', 'Two-factor authentication is mandatory and cannot be disabled for security reasons.');
     }
 
     /**

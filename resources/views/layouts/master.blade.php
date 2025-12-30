@@ -492,21 +492,39 @@
         </div>
 
         <!-- Quick Action Buttons -->
-        <div class="quick-actions p-3 bg-light">
-            <div class="row g-2">
-                <div class="col-4">
-                    <button class="btn btn-outline-primary btn-sm w-100 quick-btn" data-message="bakiyemi göster">
-                        <i class="fas fa-wallet"></i> Bakiye
+        <div class="quick-actions p-2 bg-light" style="border-bottom: 1px solid #e0e0e0;">
+            <small class="text-muted ml-2" style="font-size: 11px;">Hızlı Sorular:</small>
+            <div class="row g-2 mt-1">
+                <div class="col-4 px-1">
+                    <button class="btn btn-outline-primary btn-sm w-100 quick-btn" data-message="Toplam bakiyem ne kadar?" style="font-size: 11px; padding: 6px 4px;">
+                        <i class="fas fa-wallet"></i><br><span style="font-size: 10px;">Bakiye</span>
                     </button>
                 </div>
-                <div class="col-4">
-                    <button class="btn btn-outline-success btn-sm w-100 quick-btn" data-message="transfer yapmak istiyorum">
-                        <i class="fas fa-exchange-alt"></i> Transfer
+                <div class="col-4 px-1">
+                    <button class="btn btn-outline-success btn-sm w-100 quick-btn" data-message="Para transferi nasıl yapılır?" style="font-size: 11px; padding: 6px 4px;">
+                        <i class="fas fa-exchange-alt"></i><br><span style="font-size: 10px;">Transfer</span>
                     </button>
                 </div>
-                <div class="col-4">
-                    <button class="btn btn-outline-info btn-sm w-100 quick-btn" data-message="kartlarımı göster">
-                        <i class="fas fa-credit-card"></i> Kartlar
+                <div class="col-4 px-1">
+                    <button class="btn btn-outline-info btn-sm w-100 quick-btn" data-message="Kartlarımı göster" style="font-size: 11px; padding: 6px 4px;">
+                        <i class="fas fa-credit-card"></i><br><span style="font-size: 10px;">Kartlar</span>
+                    </button>
+                </div>
+            </div>
+            <div class="row g-2 mt-1">
+                <div class="col-4 px-1">
+                    <button class="btn btn-outline-warning btn-sm w-100 quick-btn" data-message="Son işlemlerimi göster" style="font-size: 11px; padding: 6px 4px;">
+                        <i class="fas fa-history"></i><br><span style="font-size: 10px;">İşlemler</span>
+                    </button>
+                </div>
+                <div class="col-4 px-1">
+                    <button class="btn btn-outline-danger btn-sm w-100 quick-btn" data-message="Hesap açmak istiyorum" style="font-size: 11px; padding: 6px 4px;">
+                        <i class="fas fa-plus-circle"></i><br><span style="font-size: 10px;">Yeni Hesap</span>
+                    </button>
+                </div>
+                <div class="col-4 px-1">
+                    <button class="btn btn-outline-secondary btn-sm w-100 quick-btn" data-message="Ayarlarıma nasıl ulaşırım?" style="font-size: 11px; padding: 6px 4px;">
+                        <i class="fas fa-cog"></i><br><span style="font-size: 10px;">Ayarlar</span>
                     </button>
                 </div>
             </div>
@@ -523,12 +541,15 @@
                 <div class="message-content">
                     <div class="message-bubble bot">
                         <div class="message-text">
-                            Merhaba! 👋 Ben sizin kişisel bankacılık asistanınızım.
-                            Hesap bakiyenizden para transferine, kartlarınızdan işlem geçmişinize kadar
-                            tüm bankacılık sorularınızda size yardımcı olabilirim.
+                            Merhaba! 👋 Ben <strong>Bank Assistant</strong>, sizin akıllı bankacılık asistanınızım.
                             <br><br>
-                            Başlamak için yukarıdaki hızlı erişim butonlarını kullanabilir
-                            veya doğrudan soru sorabilirsiniz! 💬
+                            ✅ Hesap ve bakiye bilgileriniz<br>
+                            ✅ Para transferi ve ödemeler<br>
+                            ✅ Kart işlemleri ve yönetimi<br>
+                            ✅ İşlem geçmişi ve raporlar<br>
+                            ✅ Uygulama içi yönlendirme<br>
+                            <br>
+                            💡 <strong>Yukarıdaki hızlı butonlarla</strong> başlayabilir veya doğrudan soru sorabilirsiniz!
                         </div>
                         <div class="message-time">Şimdi</div>
                     </div>
