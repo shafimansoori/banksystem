@@ -55,7 +55,8 @@
                             <tr>
                                 <th>Date</th>
                                 <th>User</th>
-                                <th>Account</th>
+                                <th>Source</th>
+                                <th>Account/Card</th>
                                 <th>Code</th>
                                 <th>Description</th>
                                 <th>Amount</th>
@@ -73,8 +74,20 @@
                                         <small class="text-muted">{{ $transaction->user->email }}</small>
                                     </td>
                                     <td>
-                                        {{ $transaction->bank_account->name }}<br>
-                                        <small class="text-muted">{{ $transaction->bank_account->number }}</small>
+                                        @if(isset($transaction->bank_account_id))
+                                            <span class="badge badge-primary">Bank Account</span>
+                                        @else
+                                            <span class="badge badge-info">Card</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if(isset($transaction->bank_account_id))
+                                            {{ $transaction->bank_account->name ?? 'N/A' }}<br>
+                                            <small class="text-muted">{{ $transaction->bank_account->number ?? 'N/A' }}</small>
+                                        @else
+                                            {{ $transaction->card->card_type->name ?? 'Card' }}<br>
+                                            <small class="text-muted">****{{ $transaction->card ? substr($transaction->card->number, -4) : '****' }}</small>
+                                        @endif
                                     </td>
                                     <td>
                                         <span class="badge badge-secondary">{{ $transaction->transaction_code }}</span>
@@ -102,12 +115,12 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <small class="text-muted">{{ $transaction->analysis_result }}</small>
+                                        <span class="text-muted">{{ $transaction->analysis_result }}</span>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="9" class="text-center py-4">
+                                    <td colspan="10" class="text-center py-4">
                                         <i class="mdi mdi-check-circle text-success" style="font-size: 48px;"></i>
                                         <p class="mt-2 text-muted">No suspicious transactions detected</p>
                                     </td>

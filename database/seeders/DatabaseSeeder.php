@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             CardTableSeeder::class,
             BankTransactionsTableSeeder::class,
             SuspiciousTransactionsSeeder::class, // Şüpheli işlemler (Fraud Detection)
+            CardTransactionsSeeder::class, // Card transactions with fraud detection
         ]);
     }
 }

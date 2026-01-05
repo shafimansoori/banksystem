@@ -37,6 +37,7 @@
                                                     <th scope="col">Narration</th>
                                                     <th scope="col">Type</th>
                                                     <th scope="col">Status</th>
+                                                    <th scope="col">Risk</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -66,21 +67,32 @@
                                                         </td>
                                                         <td>
 
-                                                            @if($cardTransaction->status == "successful")
-                                                                <span class="text-success"> <i class="mdi mdi-check-all"></i> {{ ucfirst($cardTransaction->status) }} </span>
+                                                            @if($cardTransaction->status == "completed")
+                                                                <span class="text-success"> <i class="mdi mdi-check-all"></i> Completed </span>
                                                             @elseif($cardTransaction->status == "pending")
-                                                                <span class="text-warning"> <i class="mdi mdi-clock"></i> {{ ucfirst($cardTransaction->status) }} </span>
+                                                                <span class="text-warning"> <i class="mdi mdi-clock"></i> Pending </span>
                                                             @elseif($cardTransaction->status == "failed")
-                                                                <span class="text-danger"> <i class="mdi mdi-close"></i> {{ ucfirst($cardTransaction->status) }} </span>
+                                                                <span class="text-danger"> <i class="mdi mdi-close"></i> Failed </span>
                                                             @endif
 
                                                         </td>
+                                                        <td>
+                                                            @if($cardTransaction->risk_level == 'high')
+                                                                <span class="badge badge-danger" title="{{ $cardTransaction->analysis_result }}">High</span>
+                                                            @elseif($cardTransaction->risk_level == 'medium')
+                                                                <span class="badge badge-warning" title="{{ $cardTransaction->analysis_result }}">Medium</span>
+                                                            @elseif($cardTransaction->risk_level == 'low')
+                                                                <span class="badge badge-info" title="{{ $cardTransaction->analysis_result }}">Low</span>
+                                                            @else
+                                                                <span class="badge badge-success">Safe</span>
+                                                            @endif
+                                                        </td>
                                                     </tr>
                                                 @endforeach
-                                                
+
                                                 @if(count($cardTransactions) == 0)
                                                     <tr>
-                                                        <td colspan="7" class="span4 text-center text-muted"> No Transaction Found</td>
+                                                        <td colspan="8" class="span4 text-center text-muted"> No Transaction Found</td>
                                                     </tr>
                                                 @endif
 
@@ -122,17 +134,15 @@
                     </button>
                 </div>
                 <div class="modal-body p-5">
-                
-                    <div class="form-group">
-                        <label for="transactionCodeInput">Transaction Code</label>
-                        <input type="text" class="form-control" id="transactionCodeInput" aria-describedby="transactionCodeInputHelp" name="transaction_code" required />
-                        <small id="transactionCodeInputHelp" class="form-text text-muted"><b>NB:</b> Must Important Part Of Every Transaction</small>
+
+                    <div class="alert alert-info">
+                        <i class="mdi mdi-information"></i> Transaction code will be generated automatically
                     </div>
 
                     <div class="form-group">
-                        <label for="transactionNarrationInput">Narration</label>
-                        <input type="text" class="form-control" id="transactionNarrationInput" aria-describedby="transactionNarrationInputHelp" name="narration" required />
-                        <small id="transactionNarrationInputHelp" class="form-text text-muted"><b>NB:</b> Narration For Transaction should be added to make the transaction legit. Describe the Transaction</small>
+                        <label for="transactionNarrationInput">Transaction Description *</label>
+                        <input type="text" class="form-control" id="transactionNarrationInput" name="narration" required placeholder="e.g., Online shopping, Restaurant payment, etc." />
+                        <small class="form-text text-muted">Describe the transaction clearly for fraud detection analysis</small>
                     </div>
 
                     <div class="form-group">
@@ -173,29 +183,6 @@
                             Available Balance
                         </label>
                     </div>
-
-                    <p class="mt-4">Transaction Status</p>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" id="statusRadios3" value="successful" checked>
-                        <label class="form-check-label" for="statusRadios3">
-                            Successful
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" id="statusRadios1" value="pending">
-                        <label class="form-check-label" for="statusRadios1">
-                            Pending
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" id="statusRadios2" value="failed">
-                        <label class="form-check-label" for="statusRadios2">
-                            Failed
-                        </label>
-                    </div>
-
-                    
 
                 </div>
                 <div class="modal-footer">

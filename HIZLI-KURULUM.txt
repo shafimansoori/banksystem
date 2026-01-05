@@ -1,0 +1,72 @@
+========================================
+BANK SYSTEM - HIZLI KURULUM KOMUTLARI
+========================================
+
+1. COMPOSER YÜKLE
+   composer install
+
+2. NODE MODÜLLERI YÜKLE
+   npm install
+
+3. .ENV DOSYASI OLUŞTUR
+   cp .env.example .env
+
+4. VERİTABANI OLUŞTUR (MySQL'e gir)
+   mysql -u root -p
+
+   MySQL içinde:
+   CREATE DATABASE bank_system;
+   EXIT;
+
+5. .ENV DOSYASINI DÜZENLE
+   - DB_DATABASE=bank_system
+   - DB_USERNAME=root
+   - DB_PASSWORD=(şifreni gir)
+   - Eğer MAMP kullanıyorsan: DB_PORT=8889
+
+6. UYGULAMA ANAHTARI OLUŞTUR
+   php artisan key:generate
+
+7. VERİTABANI TABLOLARI VE ÖRNEK VERİLER
+   php artisan migrate:fresh --seed
+
+8. STORAGE LINK
+   php artisan storage:link
+
+9. SWAGGER OLUŞTUR
+   php artisan l5-swagger:generate
+
+10. SUNUCULARI BAŞLAT (2 ayrı terminal)
+    Terminal 1: php artisan serve
+    Terminal 2: npm run dev
+
+11. TARAYICIDA AÇ
+    http://localhost:8000
+
+========================================
+GİRİŞ BİLGİLERİ
+========================================
+Email: admin@gmail.com
+Şifre: #4#4
+
+Email: ali@gmail.com
+Şifre: #4#4
+
+Email: customercare@gmail.com
+Şifre: #4#4
+
+========================================
+SORUN GİDERME KOMUTLARI
+========================================
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+php artisan permission:cache-reset
+chmod -R 775 storage bootstrap/cache
+
+========================================
+ÖNEMLİ LINKLER
+========================================
+Ana Sayfa: http://localhost:8000
+API Docs: http://localhost:8000/api/documentation
+Flagged Transactions: http://localhost:8000/flagged-transactions

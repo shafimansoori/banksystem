@@ -16,17 +16,21 @@ class TransactionAnalyzer
 
     /**
      * Analyze transaction description for suspicious activity
+     * Always uses AI for comprehensive multilingual fraud detection
      */
     public function analyzeTransaction(string $description, float $amount, string $type): array
     {
-        // Simple keyword-based analysis (local, fast, no API cost)
+        // Quick local analysis for backup
         $localAnalysis = $this->performLocalAnalysis($description, $amount, $type);
 
-        // If local analysis flags it as potentially risky, use AI for deeper analysis
-        if ($localAnalysis['risk_level'] !== 'safe') {
+        // Always use AI for comprehensive analysis (supports Turkish, English, all languages)
+        // AI can detect fraud patterns that keywords miss
+        if (!empty($this->openaiApiKey)) {
             return $this->performAIAnalysis($description, $amount, $type, $localAnalysis);
         }
 
+        // Fallback to local keyword analysis if no API key configured
+        Log::warning('OpenAI API key not configured. Using basic keyword analysis only.');
         return $localAnalysis;
     }
 
@@ -39,11 +43,26 @@ class TransactionAnalyzer
         $riskLevel = 'safe';
         $reasons = [];
 
-        // Suspicious keywords
+        // Suspicious keywords (English & Turkish)
         $suspiciousKeywords = [
-            'high' => ['urgent', 'lottery', 'prize', 'winner', 'casino', 'gambling', 'betting'],
-            'medium' => ['transfer', 'foreign', 'offshore', 'gift', 'donation', 'charity'],
-            'low' => ['cash', 'atm', 'withdrawal']
+            'high' => [
+                // English
+                'urgent', 'lottery', 'prize', 'winner', 'casino', 'gambling', 'betting', 'scam', 'fraud',
+                // Turkish
+                'kumar', 'bahis', 'piyango', 'şans oyunu', 'acil', 'kazanan', 'ödül', 'dolandırıcılık'
+            ],
+            'medium' => [
+                // English
+                'transfer', 'foreign', 'offshore', 'gift', 'donation', 'charity', 'unusual', 'suspicious',
+                // Turkish
+                'yurtdışı', 'yabancı', 'hediye', 'bağış', 'havale', 'şüpheli', 'nakit para'
+            ],
+            'low' => [
+                // English
+                'cash', 'atm', 'withdrawal',
+                // Turkish
+                'nakit', 'çekim', 'bankamatik'
+            ]
         ];
 
         // Check for suspicious keywords
@@ -111,20 +130,36 @@ class TransactionAnalyzer
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $this->openaiApiKey,
                 'Content-Type' => 'application/json',
-            ])->timeout(10)->post('https://api.openai.com/v1/chat/completions', [
-                'model' => 'gpt-3.5-turbo',
+            ])->timeout(15)->post('https://api.openai.com/v1/chat/completions', [
+                'model' => 'gpt-4o-mini', // Faster and cheaper than gpt-3.5-turbo
                 'messages' => [
                     [
                         'role' => 'system',
-                        'content' => 'You are a fraud detection expert analyzing bank transactions. Analyze the transaction and respond with a JSON object containing: risk_level (safe/low/medium/high), reason (short explanation), and suspicious (boolean).'
+                        'content' => 'You are an expert fraud detection AI analyzing bank transactions in ANY language (Turkish, English, etc).
+
+Detect suspicious patterns including:
+- Gambling (kumar, bahis, casino, betting)
+- Lottery/Prize scams (piyango, ödül, lottery, prize)
+- Urgent transfers (acil, urgent)
+- Offshore/Foreign transfers (yurtdışı, offshore)
+- Money laundering patterns
+- Unusual transaction descriptions
+
+Respond ONLY with a JSON object:
+{
+  "risk_level": "safe|low|medium|high",
+  "reason": "Brief explanation in English",
+  "suspicious": true/false
+}'
                     ],
                     [
                         'role' => 'user',
-                        'content' => "Analyze this transaction:\nDescription: {$description}\nAmount: \${$amount}\nType: {$type}\n\nLocal analysis flagged it as: {$localAnalysis['risk_level']}"
+                        'content' => "Analyze this transaction:\nDescription: {$description}\nAmount: \${$amount}\nType: {$type}"
                     ]
                 ],
-                'temperature' => 0.3,
-                'max_tokens' => 150
+                'temperature' => 0.2,
+                'max_tokens' => 200,
+                'response_format' => ['type' => 'json_object']
             ]);
 
             if ($response->successful()) {
